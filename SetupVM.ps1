@@ -46,7 +46,7 @@ $env:Path += ";$7zPath;"
 
 
 $code = Read-Host "Press Enter Once AMD Drivers are installed."
-Get-PnpDevice -FriendlyName "Microsoft Hyper-V Video" | Disable-PnpDevice 
+Get-PnpDevice -FriendlyName "Microsoft Hyper-V Video" | Disable-PnpDevice -Confirm:$false
 
 Write-Host "You're done :)!"
 pause
