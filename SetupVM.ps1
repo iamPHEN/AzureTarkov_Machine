@@ -48,5 +48,10 @@ $env:Path += ";$7zPath;"
 $code = Read-Host "Press Enter Once AMD Drivers are installed."
 Get-PnpDevice -FriendlyName "Microsoft Hyper-V Video" | Disable-PnpDevice -Confirm:$false
 
+$PageFile = Get-CimInstance -ClassName Win32_PageFileSetting -Filter "Name like '%pagefile.sys'"
+$PageFile | Remove-CimInstance
+$PageFile = New-CimInstance -ClassName Win32_PageFileSetting -Property @{ Name= "C:\pagefile.sys" }
+$PageFile | Set-CimInstance -Property @{ InitialSize = 16384; MaximumSize = 16384 }
+
 Write-Host "You're done :)!"
 pause
